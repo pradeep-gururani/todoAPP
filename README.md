@@ -1,1 +1,3 @@
-# todoAPP simple todoAPP in react
+# todoAPP 
+
+A simple todoAPP in react
