@@ -7,7 +7,11 @@
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
     "react-scripts": "2.1.8",
-    "uuid": "^3.3.2"
+    "react-service": "^5.0.0",
+    "react-toastify": "^4.5.2",
+    "rxjs": "^6.4.0",
+    "uuid": "^3.3.2",
+    "uuid4": "^1.1.4"
   },
   "scripts": {
     "start": "react-scripts start",

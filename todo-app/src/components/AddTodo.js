@@ -1,45 +1,58 @@
-import React from 'react';
-var validTodo = "form-control";
-
+import React from "react";
+let validTodo = "form-control";
+let uid = require('uuid4');
+let newTask = '';
 class AddTodo extends React.Component {
-    constructor(props){
-        super(props);
-        this.state={
-            task:''
-        }
-        this.handleChange = this.handleChange.bind(this);
-    }
+  constructor(props) {
+    super(props);
+    this.handleChange = this.handleChange.bind(this);
+  }
 
-    handleChange(event) {
-        validTodo = (event.target.value === '') ? "form-control border border-danger" : "form-control";
-        console.log('va',validTodo);
-        console.log(event.target.value);
-        if(event.target.value ===''){
-            
-            alert('please enter a todo');
-        }
-        else{
-            var newTask = {"task":`${event.target.value}`,"complete":"no" };            
-            this.setState({
-                task:newTask
-            });
-                        
-        }
-            
+  handleChange(event) {
+    newTask = event.target.value;  
+    validTodo = event.target.value === ""
+        ? "form-control border border-danger"
+        : "form-control";
+    console.log("va", validTodo);
+    console.log(event.target.value);
+    if (newTask === "" ) {
+      alert("please enter a todo");
+    } else {
+      newTask = {id:uid(), task: `${event.target.value}`, complete: "no" };
     }
-    render(){ 
-        return (  
-            <div className="Todoform">
-                <form onSubmit={(e)=>{e.preventDefault();this.props.handleSubmit(this.state.task)}}>
-                    {console.log('e',this.props.data)}
-                    <h6>Todo</h6>
-                    <input type={"text"} id = "input"  placeholder = "your todo.." onChange = {this.handleChange} className={validTodo}/>
-                    <input type={"submit"} /*onClick = {(e)=>{e.preventDefault();this.props.updateState(this.state.task)}}*/  className="button" />
-                </form>
-            </div>
-        );
-    }
+  }
 
+  render() {
+    return (
+      <div className="Todoform">
+        <form
+          onSubmit={e => {
+            e.preventDefault();
+            this.props.handleSubmit(newTask);
+            console.log(newTask);
+        }}
+        >
+          {console.log("e", this.props.data)}
+          <h6>Todo</h6>
+          <input
+            type="text"
+            id="input"
+            placeholder="your todo.."
+            onChange={this.handleChange}
+            className={validTodo}
+          />
+          <input
+            type="submit"
+            className="button"
+            onClick={e => {
+                e.preventDefault();
+                this.notify;
+              }}
+          />
+        </form>
+      </div>
+    );
+  }
 }
 
 export default AddTodo;
