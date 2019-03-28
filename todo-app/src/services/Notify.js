@@ -1,5 +1,5 @@
-import { BehaviorSubject } from 'rxjs';
-import { toast, Zoom } from 'react-toastify';
+import { BehaviorSubject } from "rxjs";
+import { toast, Zoom } from "react-toastify";
 
 const notifications = new BehaviorSubject(null);
 
@@ -8,7 +8,7 @@ class NotificationService {
   configuration = {
     position: toast.POSITION.TOP_CENTER,
     transition: Zoom
-  }
+  };
 
   sendNotification = (message, type) => {
     try {
@@ -37,7 +37,7 @@ class NotificationService {
       notifications.next(() => toast.error(ex.message, this.configuration));
     }
     notifications.next(null);
-  }
+  };
 }
 
 const Notify = new NotificationService();
@@ -45,8 +45,8 @@ const Notify = new NotificationService();
 export default Notify;
 
 export const AlertTypes = Object.freeze({
-  success: Symbol('success'),
-  info: Symbol('info'),
-  warn: Symbol('warn'),
-  error: Symbol('error')
+  success: Symbol("success"),
+  info: Symbol("info"),
+  warn: Symbol("warn"),
+  error: Symbol("error")
 });

@@ -3,7 +3,6 @@ import Notify, { AlertTypes } from "../services/Notify";
 const DATASTORE = require("../services/DataStore");
 const GETDATA = require("../services/GetData");
 let storedData;
-
 class EditTodo extends Component {
   constructor(props) {
     super(props);
@@ -29,8 +28,9 @@ class EditTodo extends Component {
     findVal.task = toEdit;
   };
 
-  handleSave = storedData => {
+  handleSave = (storedData) => {
     DATASTORE(storedData);
+    
     // this.editTodo(JSON.parse(GETDATA("localData")));
     this.notifyInfo("data updated successfully!");
   };
@@ -44,12 +44,14 @@ class EditTodo extends Component {
 
   render() {
     const id = this.props.match.params.id;
+    
+    console.log('callback',this.props);
     let editVal;
     let todoData = JSON.parse(GETDATA("localData"));
     let findVal = this.findData(todoData, id);
     editVal = findVal.task;
 
-    console.log(todoData);
+    console.log(this.props);
     return (
       <div className="EditTodo">
         <form
