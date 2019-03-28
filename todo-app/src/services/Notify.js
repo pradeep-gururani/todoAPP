@@ -6,7 +6,7 @@ const notifications = new BehaviorSubject(null);
 class NotificationService {
   notifications = notifications.asObservable();
   configuration = {
-    position: toast.POSITION.BOTTOM_CENTER,
+    position: toast.POSITION.TOP_CENTER,
     transition: Zoom
   }
 

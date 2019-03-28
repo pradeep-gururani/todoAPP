@@ -59,3 +59,9 @@
   margin-top: 10px;
   padding: 5px 10px;
 }
+.Todoval{
+  display: inline-block;
+}
+.textArea{
+  resize: none;
+}
