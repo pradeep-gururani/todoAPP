@@ -55,8 +55,7 @@ class EditTodo extends Component {
     return (
       <div className="EditTodo">
         <form onSubmit = {e=>{e.preventDefault(); this.handleSave(storedData);}}>
-          <h6>EditTodo</h6>          
-          {/* <span>{editVal}</span> */}
+          <h6>EditTodo</h6>                    
           <input
             type ="text"
             className ="form-control"
