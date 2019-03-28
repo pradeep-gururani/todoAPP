@@ -1,71 +1,100 @@
 import React from "react";
-import { Link } from "react-router-dom";
 class Todo extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { EditMode: null, checked: null };
+  }
+
+  handleTodoCheck = id => {
+    this.setState({
+      checked: id
+    });
+  };
+
   render() {
-    let func = this.props;
+    let thisProp = this.props;
     return (
       <div className="todoMain">
-        {this.props.data.map(function(dat) {
-          if (dat.complete === "yes") {
-            return (
-              <div key={dat.task}>
-                <input
-                  type="checkbox"
-                  className="mr-1"
-                  defaultChecked={dat.checked}
-                  onClick={e => {
-                    e.preventDefault();
-                    func.handleUpdate(dat.id);
-                  }}
-                />
-                <span className="Todoval">{dat.task}</span>
-                <span className="badge badge-pill badge-secondary float-right">
-                  complete
-                </span>
+        {this.props.data.map(dat => {
+          return (
+            <div key={dat.id}>
+              <input
+                type="checkbox"
+                checked={
+                  this.state.checked === dat.id || dat.checked === true
+                    ? true
+                    : false
+                }
+                onClick={e => {
+                  e.preventDefault();
+                  thisProp.handleUpdate(dat.id);
+                }}
+                onChange={e => {
+                  e.preventDefault();
+                  this.handleTodoCheck(dat.id);
+                }}
+              />
+              {thisProp.inEditMode === null ||
+              dat.id !== thisProp.inEditMode ? (
                 <span>
-                  <button className="btn btn-info float-right edit">
-                    <Link to={{ pathname: "/EditTodo/" + dat.id }}>Edit</Link>
-                  </button>
-                  <span
-                    className="btn btn-danger float-right align-top"
-                    onClick={e => {
-                      e.preventDefault();
-                      func.handleDelete(dat.id);
-                    }}
-                  >
-                    delete
+                  <span>{dat.task}</span>
+                  <span className="float-right">
+                    <button
+                      className="btn btn-info mr-1"
+                      onClick={e => {
+                        e.preventDefault();
+                        thisProp.taskEdit(dat.id);
+                      }}
+                    >
+                      Edit
+                    </button>
+                    <button
+                      className="btn btn-danger"
+                      onClick={e => {
+                        e.preventDefault();
+                        thisProp.handleDelete(dat.id);
+                      }}
+                    >
+                      Delete
+                    </button>
                   </span>
                 </span>
-              </div>
-            );
-          } else {
-            return (
-              <div key={dat.task}>
-                <input
-                  type="checkbox"
-                  className="mr-1"
-                  defaultChecked={dat.checked}
-                  onClick={e => {
-                    e.preventDefault();
-                    func.handleUpdate(dat.id);
-                  }}
-                />
-                {dat.task}
-                <button className="btn btn-info float-right edit">
-                  <Link to={{ pathname: "/EditTodo/" + dat.id }}>Edit</Link>
-                </button>
-                <span
-                  className="btn btn-danger float-right align-top"
-                  onClick={e => {
-                    e.preventDefault();
-                    func.handleDelete(dat.id);
-                  }}
-                >
-                  delete
+              ) : (
+                <span>
+                  <form>
+                    <input
+                      type="text"
+                      placeholder={dat.task}
+                      onChange={e => {
+                        e.preventDefault();
+                        thisProp.taskChange(e.target.value);
+                      }}
+                    />
+                    <span className="float-right">
+                      <button
+                        className="btn btn-info  align-top mr-1"
+                        onClick={e => {
+                          e.preventDefault();
+                          thisProp.taskUpdate(dat.id);
+                        }}
+                      >
+                        update
+                      </button>
+                      <button
+                        className="btn btn-danger edit"
+                        onClick={e => {
+                          e.preventDefault();
+                          thisProp.removeId(dat.id);
+                        }}
+                      >
+                        Cancle
+                      </button>
+                    </span>
+                  </form>
                 </span>
-              </div>
-            );
-          }
+              )}
+            </div>
+          );
         })}
       </div>
     );

@@ -9,15 +9,12 @@ class AddTodo extends React.Component {
       event.target.value === ""
         ? "form-control border border-danger"
         : "form-control";
-    console.log("va", validTodo);
-    console.log(event.target.value);
     if (newTask === "") {
       alert("please enter a todo");
     } else {
       newTask = {
         id: uid(),
         task: `${event.target.value}`,
-        complete: "no",
         checked: false
       };
     }
@@ -30,7 +27,6 @@ class AddTodo extends React.Component {
           onSubmit={e => {
             e.preventDefault();
             this.props.handleSubmit(newTask);
-            console.log(newTask);
           }}
         >
           <h6>Todo</h6>
