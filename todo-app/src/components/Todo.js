@@ -1,18 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import EditTodo from "./EditTodo";
-
 class Todo extends React.Component {
   render() {
     let func = this.props;
-    const routes = [
-      {
-        path: "/EditTodo/:id",
-        component: EditTodo,
-        render: { props: func.editTodo }
-      }
-    ];
-
     return (
       <div className="todoMain">
         {this.props.data.map(function(dat) {
