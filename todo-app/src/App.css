@@ -35,18 +35,18 @@
   margin: 0;
   padding: 0;
 }
-.todoMain li{
+.todoMain div{
   border: 1px solid #ebebeb;
   padding: 10px;
   list-style: none; 
 }
-.todoMain li:not(:last-of-type){
+.todoMain div:not(:last-of-type){
   border-bottom: none;
 }
-.todoMain li:first-of-type{
+.todoMain div:first-of-type{
   border-radius: 3px 3px 0 0;
 }
-.todoMain li:last-of-type{
+.todoMain div:last-of-type{
   border-radius: 0 0 3px 3px;
 } 
 .Todoform{
@@ -58,4 +58,10 @@
   border-radius: 3px;
   margin-top: 10px;
   padding: 5px 10px;
+}
+.Todoval{
+  display: inline-block;
+}
+.textArea{
+  resize: none;
 }
