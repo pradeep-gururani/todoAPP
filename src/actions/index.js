@@ -17,6 +17,16 @@ export const toggleEdit = id => ({
   id
 });
 
+export const checkTodo = id => ({
+  type: "CHECK_TODO",
+  id
+});
+
+export const cancleEdit = id => ({
+  type: "CANCLE_EDIT",
+  id
+});
+
 export const deleteTodo = id => ({
   type: "DELETE_TODO",
   id

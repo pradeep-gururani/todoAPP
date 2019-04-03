@@ -1,28 +1,55 @@
+import { toast } from "react-toastify";
+
 const handleTodos = (state = [], action) => {
+  let stateIndex;
+  for (let i in state) {
+    if (state[i].id === action.id) {
+      stateIndex = i;
+      break;
+    }
+  }
   switch (action.type) {
     case "ADD_TODO":
-      console.log("inside add todos..!!");
-      return [
+      let newState = [
         ...state,
         {
           id: action.id,
           text: action.text,
           inEditMode: null,
-          completed: false
+          checked: false
         }
       ];
-    case "TOGGLE_TODO":
-      return state.map(todo =>
-        todo.id === action.id ? { ...todo, completed: !todo.completed } : todo
-      );
+      toast.success("todo added successfully!!");
+      return newState;
     case "DELETE_TODO":
-      return;
+      let delState = [...state];
+      delState.splice(stateIndex, 1);
+      toast.warn("deleted todo");
+      return [...delState];
 
     case "TOGGLE_EDIT":
-      console.log("editing--->", action.id);
+      let editState = [...state];
+      editState[stateIndex].inEditMode = action.id;
+      return [...editState];
+
+    case "CANCLE_EDIT":
+      let cancEdit = [...state];
+      cancEdit[stateIndex].inEditMode = null;
+      return [...cancEdit];
+
+    case "UPDATE_TODO":
+      let updState = [...state];
+      updState[stateIndex].text = action.text;
+      updState[stateIndex].inEditMode = null;
+      toast.info("updated todo!");
+      return [...updState];
+
+    case "CHECK_TODO":
+      toast.info("updated todo!");
       return state.map(todo =>
-        todo.id === action.id ? { ...todo, inEditMode: action.id } : todo
+        todo.id === action.id ? { ...todo, checked: !todo.checked } : todo
       );
+
     default:
       return state;
   }
